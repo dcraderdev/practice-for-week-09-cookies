@@ -2,17 +2,31 @@
 
 // For storing user's theme selection in cookies
 function storeTheme(themeName) {
-    // Your code here
+    document.cookie = `theme=${themeName};max-age=2`;
 }
 
 // For restoring theme from cookies, if selected by the user in the past
 function restoreTheme() {
-    // Your code here
-}
+    // Get the theme cookie
+    const theme = getCookie('theme');
+    if (theme) {
+      // Pass the theme value to the setTheme function
+      setTheme(theme);
+    }
+  }
+  
+  function getCookie(name) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) {
+      return parts.pop().split(";").shift();
+    }
+  }
 
 // For clearing theme selection from cookies (reset to default)
 function clearTheme() {
-    // Your code here
+    document.cookie = 'theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    resetTheme()
 }
 
 /* ================================ PHASE 3 ================================ */
